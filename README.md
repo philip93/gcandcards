@@ -1,4 +1,4 @@
 gcandcards
 ==========
 
-Card database of Guardian Cross
+Card database of Guardian Cross for android
