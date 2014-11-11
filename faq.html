@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Guardian Cross - Q&amp;A</title>
+<link rel="stylesheet" type="text/css" href="css/gc.css">
+<link rel="stylesheet" type="text/css" href="css/gc_jp.css">
+</head>
+<body>
+<div id="faq">
+
+<div class="question">I cannot see any card. What should I do?</div>
+<div class="answer">
+First, please make sure that
+<ul>
+    <li>you didn't disable the loading of all cards,</li>
+    <li>your browser is up to date,</li>
+    <li>your browser support HTML5 and Javascript, and</li>
+    <li>your browser is not Internet Explorer (not required).</li>
+</ul>
+<p>
+Internet Explorer is not recommended because the original developer of this site used Mac.
+Sometimes I may use features that are not supported by Internet Explorer.
+</p>
+<p>
+If some of the cards are enabled but you cannot see them.
+That may be caused by a Javascript error.
+A possible reason is that when Javascript files are updated on the server,
+the browser (or the network provider) may not fetch all the updated files.
+For this case, please perform the following step.
+</p>
+<ul>
+    <li>Refresh the webpage.</li>
+</ul>
+Sometimes a single refresh may not work.
+So if the problem still exists, please perform the following steps.
+<ul>
+    <li>Clear the browser cache.</li>
+    <li>Refresh the webpage.</li>
+</ul>
+
+Note that some network providers may cache webpages.
+Even you refresh the site many times, the network providers
+may still return the cached and obsolete webpages.
+</div>
+
+
+
+<div class="question">
+Why there is <span class="warning">[CARD NOT LOADED]</span>?
+</div>
+<div class="answer">
+That should be a link to a card, which has been disabled by you.
+</div>
+
+
+
+<div class="question">How to get a direct link to a card?</div>
+<div class="answer">
+<p>
+When you select a card, click on the big name of the card and then
+the current URL will change. The new URL with "id=xxxxx" is a direct
+link to the card.
+</p>
+<p>
+<img src="images/faq_direct_link.jpg" alt="Direct link to a card" />
+</p>
+</div>
+
+
+
+<div class="question">How to search for a card?</div>
+<div class="answer">
+<p>
+You may search for a card with a specified name by the URL of the
+following form:
+<pre>
+http://gccards.web.fc2.com/?name=TERM
+</pre>
+where TERM is a string of comma separated terms. The first matched
+card will be returned. For example, 
+<a href="http://gccards.web.fc2.com/?name=gilga">http://gccards.web.fc2.com/?name=gilga</a>
+gives you Gilgamesh, and 
+<a href="http://gccards.web.fc2.com/?name=gilga,ffv">http://gccards.web.fc2.com/?name=gilga,ffv</a>
+gives you Gilgamesh (FFV).
+</p>
+
+<p>
+You may also search for a card with a specified ID by the URL of the
+following form:
+<pre>
+http://gccards.web.fc2.com/?id=ID
+</pre>
+where ID is the ID of the card (5 digits). For example,
+<a href="http://gccards.web.fc2.com/?id=40054">http://gccards.web.fc2.com/?id=40054</a>
+gives you Serenade Banshee.
+</p>
+
+<p>
+If you want to search for several cards that satisfy a certain condition, you may use
+the URL of the following form:
+<pre>
+http://gccards.web.fc2.com/cards.html?QUERYS
+</pre>
+where QUERYS is a string of &amp; separated QUERY, QUERY has the form Q=T, and T is a
+string of comma separated search terms. Q may be one of the following:
+<ul>
+<li>id: Search for cards with the IDs.</a>
+<li>name: Search for cards with names containing all the search terms.</a>
+<li>stars: Search for cards with one of the specified stars.</a>
+<li>attr: Search for cards with one of the specified attributes.</a>
+<li>place: Search for cards encountered in one of the specified places.</a>
+<li>border: Search for cards with one of the specified borders (almighty, mighty, great, or none).</a>
+<li>skill: Search for cards with one of the specified skills. (Shorthands such as ls, qs, sd, and ds can be used.)</a>
+</ul>
+For example, 
+<a href="http://gccards.web.fc2.com/cards.html?place=plains&amp;stars=4,5&amp;border=none">http://gccards.web.fc2.com/cards.html?place=plains&amp;stars=4,5&amp;border=none</a>
+returns non-bordered 4 stars and 5 stars cards that are encountered in Berneside Plains.
+</p>
+
+</div>
+
+
+
+<div class="question">What does the color of the big type mean?</div>
+<div class="answer">
+The colors denote the classification of the types into good, 
+decent, and bad types with respect to the selected card.
+Which classification is used can be set in the Options dialog.
+<span class="warning">We do not suggest that which classification
+should be used.</span>
+Set the classification with your own judgement and preference.
+Below are the colors (from good to bad).
+<ul>
+<dl>
+<dt>Ace type</dt>
+<dd><span class='ace-type'>Ace</span></dd>
+<dt>Good types</dt>
+<dd>
+    <span class='good-type10'>Good</span>
+    <span class='good-type9'>Good</span>
+    <span class='good-type8'>Good</span>
+    <span class='good-type7'>Good</span>
+</dd>
+<dt>Decent types</dt>
+<dd>
+    <span class='decent-type7'>Decent</span>
+    <span class='decent-type6'>Decent</span>
+    <span class='decent-type5'>Decent</span>
+    <span class='decent-type4'>Decent</span>
+</dd>
+<dt>Bad types</dt>
+<dd>
+    <span class='bad-type3'>Bad</span>
+    <span class='bad-type2'>Bad</span>
+    <span class='bad-type1'>Bad</span>
+</dd>
+</dl>
+</div>
+
+
+
+<div class="question">Why my max card stats are different from yours?</div>
+<div class="answer">
+The max card stats are computed from the initial values.
+Bias may exist.
+</div>
+
+
+
+<div class="question">
+Why RB Ace Nuada cannot kill (one shot) RB Ace Omega
+but RB Ace Omega can be killed by (one shot by) RB Ace
+Nuada with Physical+4?
+</div>
+<div class="answer">
+<p>
+The default skills set of 
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+contains Last Stand, Greater Might (ATK+20%), and Storm Impact (Physical+4).
+With the three skills, 
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+cannot kill <a href='javascript:insertGuardian("40183", 15);'>RB Ace Omega</a>
+equipped with Weakness (Enemy ATK-20%), which is not a recommended skill of
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a>.
+</p>
+<p>
+The default skills set of
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a> 
+contains Mind Blast (Enemy WIS-20%), Vanish (Light+4), and Greater Cunning 
+(WIS+20%). With the three skills, 
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a> 
+may be killed by
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+equipped with Greater Might (ATK+20%), Storm Impact (Physical+4), and Ursince
+Aspect (ATK/DEF+10%).
+</p>
+<p>
+If the option "Ignore Non-Recommended Buff/Debuff" is enabled, then we only
+consider the case where both 
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+and
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a> 
+use their default skills, and thus the results will become consistent.
+</div>
+
+<div class="question">Are the recommended skills always the best?</div>
+<div class="answer">
+<p>
+No.
+The best skills depend on the type and the usage of the cards.
+For example, Sphinx Empress as a physical attacker may be equipped
+with QS, ATK+20%, and Physical+4 while Sphinx Empress as an
+elemental attacker may be equipped with QS, WIS-20%, and
+Elemental+4.
+You may set your own recommended skills by the buttons in Skills&amp;Options.
+<ul>
+<li>Save - Save the recommended skills for the card of the selected type.</li>
+<li>Save for All - Save the recommended skills for the card of all types.</li>
+<li>Default - Revert the recommended skills for the card of the selected type.</li>
+<li>Default to All - Revert the recommended skills for the card of all types.</li>
+</ul>
+The data will be saved in a local storage, which can be cleared in Options.
+</p>
+<p>
+<img src='images/faq_custom_recommended_skills.jpg'/>
+</p>
+</div>
+
+<div class="question">Where can I find Aura cards?</div>
+<div class="answer">
+They are in <a href="excards.html">ExCards</a>.
+<ul>
+<li>They are originally called EX cards in the Japanese version.</li>
+<li>"EX" is shorter than "Aura".</li>
+</ul>
+</div>
+
+</div>
+
+<div id="footnote">
+<hr/>
+<ul>
+    <li><a href='m_cards.html'>Mobile Version</a> |</li>
+    <li><a href='javascript:showAcknowledgements()'>Acknowledgements</a> |</li>
+    <li><a href='javascript:showHelpsNeeded()'>Helps Needed</a> |</li>
+    <li><a href='javascript:showRelatedLinks()'>Related Links</a> |</li>
+</ul>
+</nav>
+<div>
+    Originally developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>, modified by <a href="https://gc-forums.com/member1305.html">Sergei</a>
+</div>
+<div>
+  All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/">Square Enix</a> Co., Ltd.
+</div>
+<div>
+  Use of this website is at your own risk.
+  No warranty is provided.
+</div>
+<div>
+  Best viewed in <a href="http://www.apple.com/safari/" target="_blank">Safari</a>.
+</div>
+</div>
+
+</body>
+</html>

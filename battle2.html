@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Guardian Cross - Battle Simulator</title>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="css/gc.css">
+<link rel="stylesheet" type="text/css" href="css/gc_jp.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/loader.js"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40784747-1', 'fc2.com');
+  ga('send', 'pageview');
+
+</script>
+<link href="css/uilightness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    .team_name {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 10px 0 10px 0;
+    }
+
+    .button {
+        font-size: 12px;
+    }
+
+    select {
+        font-size: 11px;
+    }
+    
+    #battle-top {
+        width: 1000px;
+    }
+
+    #battle-center {
+        width: 1400px;
+        height: 1000px;
+    }
+
+    #battle-left-line {
+        float: left;
+        margin: 10px 0px 0px 10px;
+        width: 370px;
+        height: 1200px;
+    }
+
+    #battle-info {
+    }
+    
+    #battle-my-image {
+        float: left;
+        position:absolute;
+        top: 110px;
+        left: 420px;
+        width: 200px;
+    }
+    
+    #battle-my-hp {
+        float: left;
+        position:absolute;
+        top: 420px;
+        left: 420px;
+        width: 180px;
+        height: 10px;
+    }
+    
+    #battle-my-mp {
+        float: left;
+        position:absolute;
+        top: 435px;
+        left: 420px;
+        width: 180px;
+        height: 10px;
+    }
+
+    #battle-oppo-image {
+        float: left;
+        position: absolute;
+        top: 110px;
+        left: 650px;
+        width: 200px;
+    }
+
+    #battle-oppo-hp {
+        float: left;
+        position: absolute;
+        top: 420px;
+        left: 650px;
+        width: 180px;
+        height: 10px;
+    }
+
+    #battle-oppo-mp {
+        float: left;
+        position: absolute;
+        top: 435px;
+        left: 650px;
+        width: 180px;
+        height: 10px;
+    }
+    
+    #battle-messages {
+        float: left;
+        margin: 380px 0px 0px 10px;
+    }
+
+    #battle-right-line {
+        float: left;
+        width: 400px;
+        margin: 10px 0px 0px 50px;
+    }
+
+    .battle-line-arrows {
+        display: inline-block;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .battle-line-header {
+        font-size: 12px;
+        width: 10px;
+        display: inline-block;
+        text-align: right;
+        margin: 0px 0px 0px 0px;
+    }
+    
+    .battle-line-stars {
+        width: 60px;
+        margin: 0px 10px 5px 10px;
+    }
+    
+    .battle-line-border {
+        width: 250px;
+        margin: 0px 0px 0px 0px;
+    }
+    
+    .battle-line-guardian {
+        width: 280px;
+        margin: 0px 0px 0px 10px;
+    }
+
+    .battle-line-avatar {
+        width: 50px;
+        display: inline-block;
+        min-width: 50px;
+        height: 1px;
+        margin: 0px 0px 0px 0px;
+        float: left;
+        z-index: 1;
+        position: relative;
+        top: 0px;
+    }
+
+    .battle-line-type {
+        width: 130px;
+        margin: 0px 0px 5px 8px;
+    }
+
+    .battle-line-level {
+        width: 50px;
+        margin: 10px 0px 0px 10px;
+    }
+
+    .battle-line-stoned {
+        width: 80px;
+        margin: 10px 0px 0px 10px;
+    }
+
+    .battle-line-skill {
+        width: 280px;
+        margin: 0px 10px 5px 58px;
+    }
+    
+    .battle-line-status {
+        margin: 0px 0px 5px 58px;
+        height: 30px;
+    }
+    
+    .battle-line-ex-header {
+        font-size: 12px;
+        width: 15px;
+        display: inline-block;
+        text-align: right;
+        margin: 0px 0px 0px 0px;
+    }
+    
+    .battle-line-ex-stars {
+        width: 60px;
+        margin: 0px 10px 5px 15px;
+    }
+    
+    .battle-line-ex-card {
+        width: 250px;
+        margin: 0px 10px 0px 0px;
+    }
+
+    .battle-line-ex-skill {
+        width: 250px;
+        margin: 0px 10px 20px 100px;
+    }
+
+    #message {
+        font-size: 12px;
+    }
+    
+    .ability-table {
+        text-align: right;
+    }
+
+    .ability-table tr td {
+        padding: 2px 10px 2px 10px;
+    }
+
+    .option-table {
+        text-align: right;
+    }
+
+    .option-table tr td {
+        padding: 2px 10px 2px 10px;
+    }
+    
+    #my_team_avatars {
+        margin-left: 220px;
+    }
+
+    #oppo_team_avatars {
+        margin-left: 0px;
+    }
+
+    img.avatar {
+        width: 128px;
+        height: 28px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    img.defeated {
+        filter: opacity(0.5) blur(2px);
+        -webkit-filter: opacity(0.5) blur(2px);
+        -moz-filter: opacity(0.5) blur(2px);
+        -o-filter: opacity(0.5) blur(2px);
+        -ms-filter: opacity(0.5) blur(2px);
+/* Google Chrome and Mozilla Firefox do not handle brightness correctly. */
+/*
+        filter: brightness(-0.2) blur(2px);
+        -webkit-filter: brightness(-0.2) blur(2px);
+        -moz-filter: brightness(-0.2) blur(2px);
+        -o-filter: brightness(-0.2) blur(2px);
+        -ms-filter: brightness(-0.2) blur(2px);
+*/
+    }
+
+    progress {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        border: none;
+        width: 200px;
+        height: 10px;
+    }
+
+    proggress::-webkit-progress-bar {
+        background: #EEEEEE;
+    }
+
+    /* Background image is not supported by Chrome. */
+    progress.hp::-webkit-progress-value {
+        background: #33FF33 url('images/battle_hp.png');
+    }
+  
+    /* Background image is not supported by Chrome. */
+    progress.mp::-webkit-progress-value {
+        background: #3333FF url('images/battle_mp.png');
+    }
+
+    /* -moz-progress-bar is for the value and background image is not supported in Firefox. */
+    progress.hp::-moz-progress-bar {
+        background: #33FF33 url('images/battle_mp.png');
+    }
+
+    /* -moz-progress-bar is for the value and background image is not supported in Firefox. */
+    progress.mp::-moz-progress-bar {
+        background: #3333FF url('images/battle_mp.png');
+    }
+</style>
+<script lang="text/javascript">
+$(function() {
+    Loader.load(true, function() {
+        Loader.load("js/simulator.js", function() {
+            Loader.load("js/battle.js", function() { battle_init(); });
+        });
+    });
+});
+</script>
+</head>
+
+<body>
+
+<nav id="top_menu">
+<ul>
+    <li><a id='nav_damage_calculator' href='index.html' class='langdep'>Calculator</a> |</li>
+    <li><a id='nav_cards' href='cards.html' class='langdep'>Cards</a> |</li>
+<!--     <li><a id='nav_excards' href='excards.html' class='langdep'>ExCards</a> |</li> -->
+    <li><a id='nav_battle_simulator' href='battle.html' class='langdep'>Simulator</a> |</li>
+    <li><a id='nav_battle_simulator2' href='battle2.html' class='langdep'>Simulator II</a> |</li>
+    <li><a id='nav_comparison' href='comparison.html' class='langdep'>Comparison (<span id='comparison_number'>0</span>)</a> |</li>
+    <li><a id='nav_faq' href='faq.html' class='langdep'>FAQ</a> |</li>
+    <li><a id='nav_feedbacks' href="http://gccards.bbs.fc2.com/" target="_blank">Feedback</a> ||</li>
+    <li><a id='nav_english' href="index.html" title="English">English</a> |</li>
+<!--     <li><a id='nav_japanese' href="index.html?lang=jp" title="Japanese">Japanese</a> |</li>
+    <li><a id='nav_android' href="http://gccand.web.fc2.com/" target="_blank">Android</a>
+      (by <a href="http://guardiancross-forum.com/User-ikubbq" target="_blank">ikubbq@GCF</a>)</li> -->
+</ul>
+</nav>
+
+<div id='battle-top'>
+    <button id="battle-button" class="button">Start Battle</button>
+    <button id="winrate-button" class="button">Win Rate</button>
+    <button id="suggestion-button" class="button">Lineup Suggestion</button>
+    <button id="options-button" class="button">Options</button>
+    <button id="reset-button" class="button">Reset</button>
+    <button id="help-button" class="button">Help</button>
+</div>
+
+<div id='ability-dialog'>
+</div>
+
+<div id='option-dialog' style='display: none;'>
+    <table class='option-table'>
+        <tr>
+            <th width='350px'>Battle Animations</th>
+            <td>
+                <label><input type='radio' name='animation' value="true" />Yes</label>
+                &nbsp;&nbsp;&nbsp;
+                <label><input type='radio' name='animation' value="false" />No</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>(Some effects may not be supported by your browser.)</td>
+        </tr>
+        <tr>
+            <th>Delay of Battle Actions (ms)</th>
+            <td><input type='text' id='options-delay' /></td>
+        </tr>
+        <tr>
+            <td colspan=2 align="center"><b><font color="red">Success Rates for My Party</font></b></td>
+        </tr>
+        <tr>
+            <th>Deft Step</th>
+            <td><input type='text' id='options-me-ds' /></td>
+        </tr>
+        <tr>
+            <th>Critical Hit by Gigant Smash</th>
+            <td><input type='text' id='options-me-gs' /></td>
+        </tr>
+        <tr>
+            <th>Last Stand</th>
+            <td><input type='text' id='options-me-ls' /></td>
+        </tr>
+        <tr>
+            <th>Mind Rift</th>
+            <td><input type='text' id='options-me-mr' /></td>
+        </tr>
+        <tr>
+            <th>Confused Action</th>
+            <td><input type='text' id='options-me-mr2' /></td>
+        </tr>
+        <tr>
+            <th>Revival</th>
+            <td><input type='text' id='options-me-revival' /></td>
+        </tr>
+        <tr>
+            <th>Sap</th>
+            <td><input type='text' id='options-me-sap' /></td>
+        </tr>
+        <tr>
+            <th>Self-destruct</th>
+            <td><input type='text' id='options-me-sd' /></td>
+        </tr>
+        <tr>
+            <td colspan=2 align="center"><b><font color="red">Success Rates for Opponent's Party</font></b></td>
+        </tr>
+        <tr>
+            <th>Deft Step</th>
+            <td><input type='text' id='options-oppo-ds' /></td>
+        </tr>
+        <tr>
+            <th>Critical Hit by Gigant Smash</th>
+            <td><input type='text' id='options-oppo-gs' /></td>
+        </tr>
+        <tr>
+            <th>Last Stand</th>
+            <td><input type='text' id='options-oppo-ls' /></td>
+        </tr>
+        <tr>
+            <th>Mind Rift</th>
+            <td><input type='text' id='options-oppo-mr' /></td>
+        </tr>
+        <tr>
+            <th>Confused Action</th>
+            <td><input type='text' id='options-oppo-mr2' /></td>
+        </tr>
+        <tr>
+            <th>Revival</th>
+            <td><input type='text' id='options-oppo-revival' /></td>
+        </tr>
+        <tr>
+            <th>Sap</th>
+            <td><input type='text' id='options-oppo-sap' /></td>
+        </tr>
+        <tr>
+            <th>Self-destruct</th>
+            <td><input type='text' id='options-oppo-sd' /></td>
+        </tr>
+        <tr>
+            <td colspan=2 align="center"><b><font color="red">ATB</font></b></td>
+        </tr>
+        <tr>
+            <th>Count AGI Buffs/Debuffs</th>
+            <td>
+                <select id='options-agibuff'>
+                    <option value='0'>None</option>
+                    <option value='1'>After a card's first round</option>
+                    <option value='2'>After a hit by the opponent</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Reset ATB bars after a QS-kill</th>
+            <td>
+                <select id='options-qs-reset'>
+                    <option value='0'>None</option>
+                    <option value='1'>Reset to previous values</option>
+                    <option value='2'>Reset to 0</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Reset ATB bars after a DR-kill</th>
+            <td>
+                <select id='options-dr-reset'>
+                    <option value='0'>None</option>
+                    <option value='1'>Reset to previous values</option>
+                    <option value='2'>Reset to 0</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id='help-dialog' style='display: none;' class="justify">
+    <h3>Correctness</h3>
+    I don't have any formal proof.
+    <h3>ATB System</h3>
+    The implemented ATB system is based on <a href="http://guardiancross-forum.com/Thread-AGI-Formula-Explained">this thread</a> on GCF.
+    <h3>Buttons</h3>
+    <ul>
+        <li><b>Start Battle</b>: Simulate a single battle. You may see detailed messages.</li>
+        <li><b>Win Rate</b>: Simulate for a specified number of rounds and see the percentage of wins.</li>
+        <li><b>Lineup Suggestion</b>: Suggest a lineup to achieve a better win rate.
+        Due to the high complexity to enumerate all possible lineups, simulations are
+        performed for a specified number of random lineups.</li>
+        <li>
+            <b>Options</b>:
+            Adjust options, including probabilities of several skills.
+            The adjustable rates are collected neither directly from the game nor
+            from statistic data.
+            The rate of death skills is computed based on WIS and skill level without
+            any proof.
+            Considering AGI buff/debuff, there are three options.
+            <ul>
+              <li>None: Do not count AGI buff/debuff.</li>
+              <li>After a card's first round: Count AGI buff/debuff of a card after its first
+              appearance and either it or its opponent performs a non-QS attack.</li>
+              <li>After a hit by the opponent: Count AGI buff/debuff of a card after the
+              opponent's first attack.</li>
+            </ul>
+            Note that for the first AGI buff/debuff option, there are counterexamples
+            found in NPC battles.
+            For the last two AGI buff/debuff options, there are counterexamples
+            found in Friends battles
+        </li>
+        <li><b>Reset</b>: Reset all parties.</li>
+        <li><b>Load</b>: Load a party from a string.</li>
+        <li><b>Save</b>: Convert a party to a string that can be loaded back later.</li>
+    </ul>
+    <h3>Unsupported Skills</h3>
+    <ul>
+        <li>Heal</li>
+        <li>Greater Heal</li>
+        <li>Life Drain</li>
+        <li>Most new skills after version 2.0 (included)</li>
+    </ul>
+</div>
+
+<div id="acknowledgements-dialog" style="display: none;" class="justify">
+Thanks
+<ul>
+    <li>小銘@<a href="http://forum.gamer.com.tw/B.php?bsn=22343&subbsn=0" target="_blank">巴哈姆特</a> for providing helps in testing this simulator</li>
+    <li>wadabeep@<a href="http://guardiancross-forum.com/" target="_blank">GCF</a> for pointing out the reset of ATB bars after a QS-kill</li>
+</ul>
+</div>
+
+<div id='battle-center'>
+
+    <div id='battle-left-line'>
+        <div id="my_team">
+        </div>
+        <div id="my_team_avatars">
+        </div>
+    </div>
+
+
+    <div id='battle-info'>
+        <div id='battle-my-image'></div>
+        <div id='battle-my-hp'></div>
+        <div id='battle-my-mp'></div>
+        <div id='battle-oppo-image'></div>
+        <div id='battle-oppo-hp'></div>
+        <div id='battle-oppo-mp'></div>
+        <div id='battle-messages'>
+            <textarea id="message" cols="60" rows="10"></textarea>
+        </div>
+    </div>
+    
+    <div id='battle-right-line'>
+        <div id="oppo_team">
+        </div>
+        <div id="oppo_team_avatars">
+        </div>
+    </div>
+<div id='battle-center'>
+
+<div id="footnote">
+<hr/>
+<nav>
+<ul>
+    <li><a href='m_cards.html'>Mobile Version</a> |</li>
+    <li><a href='javascript:showAcknowledgements()'>Acknowledgements</a> |</li>
+    <li><a href='javascript:showHelpsNeeded()'>Helps Needed</a> |</li>
+    <li><a href='javascript:showRelatedLinks()'>Related Links</a> |</li>
+</ul>
+</nav>
+<div>
+    Originally developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>, modified by <a href="http://gc-forums.com/member995">Purplemandown</a>
+</div>
+<div>
+  All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/">Square Enix</a> Co., Ltd.
+</div>
+<div>
+  Use of this website is at your own risk.
+  No warranty is provided.
+</div>
+<div>
+  Best viewed in <a href="http://www.apple.com/safari/" target="_blank">Safari</a>.
+</div>
+</div>
+
+</body>
+
+</html>
